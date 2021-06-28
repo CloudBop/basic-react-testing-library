@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 export default function SummaryForm() {
   const [tcChecked, setTcChecked] = useState(false);
 
+  // for popover
   const checkboxLabel = (
     <span>
       I agree to <span style={{ color: 'blue' }}> Terms and Conditions</span>
