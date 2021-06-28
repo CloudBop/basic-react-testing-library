@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import SummaryForm from '../SummaryForm';
 import userEvent from '@testing-library/user-event'
 
@@ -33,7 +33,7 @@ test("checking checkbox enables button, clicking again disables the button", () 
   expect(confirmBtn).toBeDisabled();
 })
 
-test("popover responds to hover evt", () => {
+test("popover responds to hover evt", async () => {
   render(<SummaryForm />);
 
   //popover starts hidden
@@ -46,10 +46,14 @@ test("popover responds to hover evt", () => {
   const popover = screen.getByText(/no ice cream will actually be delivered/i)
   expect(popover).toBeInTheDocument()
 
-  //popover disappears on mouse out
+  //popover disappears on mouse out - WILL FAIL SYNC/ASYNC ERROR
+  // userEvent.unhover(termsAndConditions)
+  // const nullPopoverAgain = screen.queryByText(/no ice cream will actually be delivered/i)
+  // expect(nullPopoverAgain).not.toBeInTheDocument();
   userEvent.unhover(termsAndConditions)
-  const nullPopoverAgain = screen.queryByText(/no ice cream will actually be delivered/i)
-  expect(nullPopoverAgain).not.toBeInTheDocument();
+  // includes assertion
+  // const nullPopoverAgain = screen.queryByText(/no ice cream will actually be delivered/i)
+  await waitForElementToBeRemoved(() => screen.queryByText(/no ice cream will actually be delivered/i))
 })
 
 // test("button+checkbox is default initialised", () => {
