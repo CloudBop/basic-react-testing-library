@@ -34,11 +34,22 @@ test("checking checkbox enables button, clicking again disables the button", () 
 })
 
 test("popover responds to hover evt", () => {
+  render(<SummaryForm />);
+
   //popover starts hidden
+  const nullPopover = screen.queryByText(/no ice cream will actually be delivered/i)
+  expect(nullPopover).not.toBeInTheDocument();
 
   //popover appears on hover
+  const termsAndConditions = screen.getByText(/terms and conditions/i)
+  userEvent.hover(termsAndConditions)
+  const popover = screen.getByText(/no ice cream will actually be delivered/i)
+  expect(popover).toBeInTheDocument()
 
   //popover disappears on mouse out
+  userEvent.unhover(termsAndConditions)
+  const nullPopoverAgain = screen.queryByText(/no ice cream will actually be delivered/i)
+  expect(nullPopoverAgain).not.toBeInTheDocument();
 })
 
 // test("button+checkbox is default initialised", () => {
