@@ -1,5 +1,6 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import SummaryForm from '../SummaryForm';
+import userEvent from '@testing-library/user-event'
 
 test("init conditions", () => {
   // https://www.w3.org/TR/wai-aria/#role_definitions
@@ -21,15 +22,23 @@ test("checking checkbox enables button, clicking again disables the button", () 
   const cb = screen.getByRole('checkbox', { name: /terms and conditions/i });
   expect(cb).not.toBeChecked();
 
-  fireEvent.click(cb)
+  userEvent.click(cb)
   expect(cb).toBeChecked();
 
   const confirmBtn = screen.getByRole('button', { name: /confirm order/i });
   expect(confirmBtn).toBeEnabled();
 
-  fireEvent.click(cb)
+  userEvent.click(cb)
   expect(cb).not.toBeChecked();
   expect(confirmBtn).toBeDisabled();
+})
+
+test("popover responds to hover evt", () => {
+  //popover starts hidden
+
+  //popover appears on hover
+
+  //popover disappears on mouse out
 })
 
 // test("button+checkbox is default initialised", () => {
