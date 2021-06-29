@@ -47,7 +47,7 @@ export function OrderDetailsProvider(props) {
   useEffect(() => {
     const scoopsSubtotal = calculateSubtotal("scoops", optionCounts)
     const toppingsSubtotal = calculateSubtotal("toppings", optionCounts)
-    const grandTotal = (scoopsSubtotal + toppingsSubtotal)
+    const grandTotal = formatCurrency(scoopsSubtotal + toppingsSubtotal)
 
     setTotals({
       scoops: formatCurrency(scoopsSubtotal),
