@@ -1,5 +1,4 @@
 import { render, screen } from '../../../testing-utilities/testing-library-utils';
-import { OrderDetailsProvider } from '../../../contexts/OrderDetails';
 import Options from '../Options';
 
 test('displays image for each scoop option from the server', async () => {
