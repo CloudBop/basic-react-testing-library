@@ -1,9 +1,7 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '../../../testing-utilities/testing-library-utils';
 import { rest } from 'msw';
 import OrderEntry from '../OrderEntry';
 import { server } from '../../../mocks/server.js'
-import { OrderDetailsProvider } from '../../../contexts/OrderDetails';
-
 test('handles errors for scoops and topping routes', async () => {
   //reset handlers from default setup
   server.resetHandlers(
@@ -12,7 +10,7 @@ test('handles errors for scoops and topping routes', async () => {
   )
 
 
-  render(<OrderEntry />, { wrapper: OrderDetailsProvider })
+  render(<OrderEntry />)
 
   // // will resolve on first response, but we're expecting from two async reqs
   // const alerts = await screen.findAllByRole('alert',
