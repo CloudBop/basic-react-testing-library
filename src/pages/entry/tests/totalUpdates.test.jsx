@@ -59,19 +59,21 @@ test('update toppings subtotal when topping change', async () => {
 })
 
 describe('grand total', () => {
-  test('grand total starts @ $0.00', () => {
+  test.skip('grand total starts @ $0.00', () => {
     render(<OrderEntry />)
-    // 
     const grandTotal = screen.getByRole('heading', {
       name: /grand total: \$/i
     })
-    expect(grandTotal).toHaveTextContent('0.00');
+    // expect(grandTotal).toHaveTextContent('0.00'); - moved below
+    // this causes error, even though all tests pass as <OrderEntry/> axios is async
+    // https://kentcdodds.com/blog/fix-the-not-wrapped-in-act-warning
   })
   test('grand total updates if scoop is added first', async () => {
     render(<OrderEntry />)
     const grandTotal = screen.getByRole('heading', {
       name: /grand total: \$/i
     })
+    expect(grandTotal).toHaveTextContent('0.00');
     //
     const vanillaInput = await screen.findByRole('spinbutton', {
       name: 'Vanilla'
