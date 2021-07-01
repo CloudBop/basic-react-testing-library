@@ -1,12 +1,13 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
-import Button from "react-bootstrap/Button"
 import { useOrderDetails } from '../../contexts/OrderDetails';
+import Button from "react-bootstrap/Button"
+import AlertBanner from '../common/AlertBanner';
 function OrderConfirmation({ setOrderPhase }) {
 
   const [, , resetOrder] = useOrderDetails();
   const [orderNumber, setOrderNumber] = useState(null);
-
+  const [error, setError] = useState(false)
   useEffect(() => {
     axios
       // in real world would get order from ctx and sned with post
@@ -15,10 +16,12 @@ function OrderConfirmation({ setOrderPhase }) {
         setOrderNumber(response.data.orderNumber);
       })
       .catch(error => {
-        //todo
+        setError(true);
       })
 
   }, [])
+  // bailout
+  if (error) return <AlertBanner variant='danger' />;
 
   function handleClick() {
     // the below doesn't seem to work...
