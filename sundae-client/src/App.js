@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { OrderDetailsProvider } from './contexts/OrderDetails';
 import Container from 'react-bootstrap/Container';
 import OrderEntry from './pages/entry/OrderEntry';
