@@ -63,12 +63,18 @@ test("order phases for happy path (golden path/way)", async () => {
   })
   userEvent.click(confirmOrderButton);
 
+  //expect loading... 
+  const loading = screen.getByText(/loading/i);
+  expect(loading).toBeInTheDocument();
   //confirm order number on confirmation page
   const thankYouHeader = await screen.findByRole('heading', {
     name: /thank you/i
   })
   expect(thankYouHeader).toBeInTheDocument();
 
+  //!expect loading... 
+  const notLoading = screen.queryByText(/loading/i);
+  expect(notLoading).not.toBeInTheDocument();
   const orderNumber = await screen.findByText(/order number/i)
   expect(orderNumber).toBeInTheDocument();
 

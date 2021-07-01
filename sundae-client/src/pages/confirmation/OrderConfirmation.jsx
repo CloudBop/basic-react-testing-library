@@ -21,9 +21,12 @@ function OrderConfirmation({ setOrderPhase }) {
   }, [])
 
   function handleClick() {
-    // the below doesn't seem to work...
+    // the below doesn't seem to reset in tests...
     resetOrder();
+    // 
     setOrderPhase('inProgress');
+    // setTimeout(() => {
+    // }, 0)
   }
 
   if (orderNumber) {
