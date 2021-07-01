@@ -91,3 +91,37 @@ test("order phases for happy path (golden path/way)", async () => {
   await screen.findByRole('spinbutton', { name: /Vanilla/i })
   await screen.findByRole('checkbox', { name: /Cherries/i })
 })
+
+test(`order phase, don't display toppings header on summary if no toppings to show`, async () => {
+  render(<App />);
+
+  // check initial state 
+  const scoopsTotal = screen.getByText('Scoops total: $0.00')
+  const toppingsTotal = screen.getByText('Toppings total: $0.00')
+  expect(scoopsTotal).toBeInTheDocument();
+  expect(toppingsTotal).toBeInTheDocument();
+
+  const scoopOption = await screen.findByRole("spinbutton", { name: /Vanilla/i });
+  // notice -> the above await will stop execution, guaranteeing next UI will be in DOM
+  const extraScoopOption = screen.getByRole("spinbutton", { name: /Chocolate/i });
+  userEvent.type(extraScoopOption, '2')
+  userEvent.type(scoopOption, '1')
+
+  //
+  //find and click order button
+  const orderSummaryBtnSubmit = screen.getByRole('button', {
+    name: /order sundae/i,
+  })
+  userEvent.click(orderSummaryBtnSubmit);
+
+  //check summary information based on order
+  const summaryHeading = screen.getByRole("heading", { name: "Order Summary" });
+  expect(summaryHeading).toBeInTheDocument();
+  // 3 scoops 
+  const scoopsHeading = screen.getByRole("heading", { name: "Scoops: $6.00" });
+  expect(scoopsHeading).toBeInTheDocument();
+  // 1 topping
+  const toppingsHeading = screen.queryByRole("heading", { name: "Toppings: $0:00" });
+  expect(toppingsHeading).not.toBeInTheDocument();
+
+})
