@@ -22,7 +22,7 @@ export default function ScoopOption({ name, imagePath, updateItemCount }) {
     if (bool) {
       updateItemCount(name, currentValue)
     } else {
-      console.log("invalid input number," + currentValue)
+      // console.log("invalid input number," + currentValue)
     }
   }
   return (
