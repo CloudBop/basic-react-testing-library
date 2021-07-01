@@ -5,7 +5,7 @@ import Options from './Options'
 function OrderEntry({ setOrderPhase }) {
   const [orderDetails] = useOrderDetails();
 
-  const orderDisabled = false;
+  const orderDisabled = orderDetails.totals.scoops === '$0.00';
   return (
     <div>
       <Options optionType="scoops" />
