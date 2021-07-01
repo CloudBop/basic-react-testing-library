@@ -121,6 +121,8 @@ describe('grand total', () => {
     userEvent.clear(vanillaInput)
     userEvent.type(vanillaInput, '2');
     expect(grandTotal).toHaveTextContent('4.00');
+    // solution is to clear input then re add. So technically, is this test valid?
+    userEvent.clear(vanillaInput)
     userEvent.type(vanillaInput, '1');
     expect(grandTotal).toHaveTextContent('2.00');
     //
