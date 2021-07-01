@@ -40,5 +40,5 @@ test("disable order btn if there are no scoops ordered", async () => {
   //
   userEvent.clear(vanillaInput)
   userEvent.type(vanillaInput, "0")
-  expect(orderButton).not.toBeEnabled()
+  expect(orderButton).toBeDisabled()
 })
