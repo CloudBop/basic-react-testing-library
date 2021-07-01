@@ -19,9 +19,11 @@ export default function ScoopOption({ name, imagePath, updateItemCount }) {
     )
     setIsValid(bool)
     //
-    // if (bool)
-
-    updateItemCount(name, evt.target.value)
+    if (bool) {
+      updateItemCount(name, currentValue)
+    } else {
+      console.log("invalid input number," + currentValue)
+    }
   }
   return (
     <Col xs={12} sm={6} md={4} lg={3} style={{ textAlign: 'center' }}>
